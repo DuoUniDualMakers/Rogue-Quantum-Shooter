@@ -73,6 +73,9 @@
 [ext_resource type="Texture2D" uid="uid://dlwj48em1ifdc" path="res://assets/images/Player/Idle/animations/Running/west/frame_005.png" id="71_e4c5e"]
 [ext_resource type="Texture2D" uid="uid://b2j44uh03opw4" path="res://assets/images/Player/Idle/animations/Running/west/frame_006.png" id="72_72noi"]
 [ext_resource type="Texture2D" uid="uid://bbs5t030xem5b" path="res://assets/images/Player/Idle/animations/Running/west/frame_007.png" id="73_0j382"]
+[ext_resource type="Texture2D" uid="uid://c4ngyr0cqjp14" path="res://assets/images/bullet/Muzzle-particle.png" id="74_0yhus"]
+[ext_resource type="Script" uid="uid://cqq381d2nujqy" path="res://scripts/automatic_gun_sound.gd" id="74_qjsmb"]
+[ext_resource type="Texture2D" uid="uid://cjks3st118fw4" path="res://assets/images/bullet/bullet-sprite.png" id="75_mwp2n"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_riqys"]
 animations = [{
@@ -376,13 +379,60 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bhunq"]
 height = 48.0
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bhunq"]
+particle_flag_disable_z = true
+angle_min = 1.0728835e-05
+angle_max = 1.0728835e-05
+inherit_velocity_ratio = 100.0
+spread = 35.0
+initial_velocity_min = 40.0
+initial_velocity_max = 40.0
+gravity = Vector3(0, 0, 0)
+scale_max = 1.5
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_riqys"]
+particle_flag_disable_z = true
+spread = 1.0
+initial_velocity_min = 900.0
+initial_velocity_max = 900.0
+gravity = Vector3(0, 0, 0)
+scale_min = 2.0
+scale_max = 2.0
+
 [node name="Player" type="CharacterBody2D" unique_id=184423102]
 script = ExtResource("1_qsb7e")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1665225661]
 sprite_frames = SubResource("SpriteFrames_riqys")
-animation = &"running_east"
-frame_progress = 0.36054054
+animation = &"idle_north"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=492151803]
 shape = SubResource("CapsuleShape2D_bhunq")
+
+[node name="Gun" type="Node2D" parent="." unique_id=431401098]
+
+[node name="Muzzle" type="Marker2D" parent="Gun" unique_id=1692585793]
+
+[node name="MuzzleFlash" type="GPUParticles2D" parent="Gun/Muzzle" unique_id=1856875156]
+emitting = false
+amount = 12
+texture = ExtResource("74_0yhus")
+lifetime = 0.12
+one_shot = true
+explosiveness = 1.0
+trail_lifetime = 0.09999999999999999
+process_material = SubResource("ParticleProcessMaterial_bhunq")
+
+[node name="GunSound" type="AudioStreamPlayer2D" parent="Gun" unique_id=422599091]
+script = ExtResource("74_qjsmb")
+
+[node name="BulletParticles" type="GPUParticles2D" parent="Gun" unique_id=2088487437]
+emitting = false
+amount = 1
+texture = ExtResource("75_mwp2n")
+lifetime = 0.15000000000000002
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_riqys")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=140795590]

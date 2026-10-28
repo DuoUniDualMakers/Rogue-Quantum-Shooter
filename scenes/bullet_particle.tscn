@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://bcd2khv5ox1be"]
+
+[ext_resource type="Texture2D" uid="uid://cjks3st118fw4" path="res://assets/images/bullet/bullet-sprite.png" id="1_mkf8s"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bhunq"]
+particle_flag_disable_z = true
+spread = 10.0
+initial_velocity_min = 900.0
+initial_velocity_max = 900.0
+gravity = Vector3(0, 0, 0)
+
+[node name="BulletParticle" type="GPUParticles2D" unique_id=1073290234]
+emitting = false
+amount = 1
+texture = ExtResource("1_mkf8s")
+lifetime = 0.8
+one_shot = true
+explosiveness = 1.0
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_bhunq")
