@@ -10,6 +10,8 @@ enum Gate { H, X, Z }
 const EPSILON := 0.000001
 const INV_SQRT_2 := 0.7071067811865476
 const LUCK_WEIGHT := 0.8
+const MINUS_DEATH_BASE := 0.5
+const PLUS_DEATH_BASE := 0.8
 
 var _amp_zero := Vector2.ZERO
 var _amp_one := Vector2(1.0, 0.0)
@@ -24,9 +26,10 @@ func probability_alive() -> float:
 	return _amp_one.x * _amp_one.x + _amp_one.y * _amp_one.y
 
 
-func death_chance(luck: float) -> float:
+func death_chance(luck: float, base_chance: float = -1.0) -> float:
+	var base := base_chance if base_chance >= 0.0 else 1.0 - probability_alive()
 	var luck_scale := 1.0 - LUCK_WEIGHT * clampf(luck, 0.0, 1.0)
-	return (1.0 - probability_alive()) * luck_scale
+	return base * luck_scale
 
 
 func state() -> State:
@@ -52,6 +55,32 @@ func apply_gate(gate: Gate) -> void:
 		Gate.Z:
 			_amp_one = -_amp_one
 	changed.emit()
+
+
+func die() -> void:
+	var previous := state()
+	_amp_zero = Vector2(1.0, 0.0)
+	_amp_one = Vector2.ZERO
+	changed.emit()
+	if previous != State.DEAD:
+		collapsed.emit(previous, State.DEAD)
+
+
+func resolve_hit(luck: float, roll: float) -> State:
+	match state():
+		State.ALIVE:
+			apply_gate(Gate.H)
+		State.MINUS:
+			if roll < death_chance(luck, MINUS_DEATH_BASE):
+				die()
+			else:
+				apply_gate(Gate.Z)
+		State.PLUS:
+			if roll < death_chance(luck, PLUS_DEATH_BASE):
+				die()
+		State.DEAD:
+			pass
+	return state()
 
 
 func measure(luck: float = 0.0) -> State:

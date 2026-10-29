@@ -122,14 +122,10 @@ func quantum_state() -> QuantumState.State:
 
 
 func take_hit(luck: float = 0.0) -> QuantumState.State:
-	if _quantum.state() == QuantumState.State.ALIVE:
-		_quantum.apply_gate(QuantumState.Gate.H)
-	else:
-		_quantum.measure(luck)
-
-	var state := _quantum.state()
+	var previous := _quantum.state()
+	var state := _quantum.resolve_hit(luck, _rng.randf())
 	quantum_state_changed.emit(state)
-	if state == QuantumState.State.DEAD:
+	if state == QuantumState.State.DEAD and previous != QuantumState.State.DEAD:
 		died.emit()
 	return state
 

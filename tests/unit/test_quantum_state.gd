@@ -104,3 +104,41 @@ func test_measure_leaves_definite_state() -> void:
 
 	var alive_chance := _quantum.probability_alive()
 	assert_true(alive_chance == 0.0 or alive_chance == 1.0)
+
+
+func test_first_hit_enters_minus() -> void:
+	assert_eq(_quantum.resolve_hit(0.0, 0.99), QuantumState.State.MINUS)
+
+
+func test_surviving_in_minus_flips_to_plus() -> void:
+	_quantum.resolve_hit(0.0, 0.99)
+
+	assert_eq(_quantum.resolve_hit(0.0, 0.99), QuantumState.State.PLUS)
+
+
+func test_lethal_roll_in_minus_collapses_to_dead() -> void:
+	_quantum.resolve_hit(0.0, 0.99)
+
+	assert_eq(_quantum.resolve_hit(0.0, 0.0), QuantumState.State.DEAD)
+
+
+func test_surviving_in_plus_stays_in_plus() -> void:
+	_quantum.resolve_hit(0.0, 0.99)
+	_quantum.resolve_hit(0.0, 0.99)
+
+	assert_eq(_quantum.resolve_hit(0.0, 0.99), QuantumState.State.PLUS)
+
+
+func test_plus_is_deadlier_than_minus() -> void:
+	assert_gt(
+		_quantum.death_chance(0.0, QuantumState.PLUS_DEATH_BASE),
+		_quantum.death_chance(0.0, QuantumState.MINUS_DEATH_BASE)
+	)
+
+
+func test_die_collapses_to_dead() -> void:
+	_quantum.apply_gate(QuantumState.Gate.H)
+
+	_quantum.die()
+
+	assert_eq(_quantum.state(), QuantumState.State.DEAD)
