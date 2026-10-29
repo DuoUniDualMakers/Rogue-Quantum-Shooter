@@ -21,6 +21,17 @@ var is_shooting: bool = false
 
 var fire_timer: float = 0.0
 
+signal quantum_state_changed(state: QuantumState.State)
+signal died
+
+var _rng := RandomNumberGenerator.new()
+var _quantum: QuantumState
+
+
+func _ready() -> void:
+	_rng.randomize()
+	_quantum = QuantumState.new(_rng)
+
 func _physics_process(delta: float) -> void:
 	
 	fire_timer = maxf(0.0, fire_timer - delta)
@@ -104,6 +115,23 @@ func shoot() -> void:
 	bullet.finished.connect(bullet.queue_free)
 
 	gun_sound.play()
+
+
+func quantum_state() -> QuantumState.State:
+	return _quantum.state()
+
+
+func take_hit(luck: float = 0.0) -> QuantumState.State:
+	if _quantum.state() == QuantumState.State.ALIVE:
+		_quantum.apply_gate(QuantumState.Gate.H)
+	else:
+		_quantum.measure(luck)
+
+	var state := _quantum.state()
+	quantum_state_changed.emit(state)
+	if state == QuantumState.State.DEAD:
+		died.emit()
+	return state
 
 	
 	
