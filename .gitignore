@@ -2,7 +2,7 @@
 .godot/
 /android/
 
-# Agent tooling (Command Code skills/taste, skills CLI installs)
+# Local editor and agent tooling state
 .commandcode/
 .agents/
 skills-lock.json
