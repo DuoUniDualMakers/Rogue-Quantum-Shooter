@@ -399,7 +399,7 @@ gravity = Vector3(0, 0, 0)
 scale_min = 2.0
 scale_max = 2.0
 
-[node name="Player" type="CharacterBody2D" unique_id=184423102]
+[node name="Player" type="CharacterBody2D" unique_id=184423102 groups=["player"]]
 script = ExtResource("1_qsb7e")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1665225661]
