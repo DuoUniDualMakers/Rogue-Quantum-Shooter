@@ -1,10 +1,13 @@
-[gd_scene format=3 uid="uid://dx66immxf3ayf"]
+[gd_scene load_steps=6 format=3 uid="uid://dx66immxf3ayf"]
 
 [ext_resource type="PackedScene" uid="uid://bkqhwjrihreqv" path="res://scenes/levels/base_level.tscn" id="1_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://dhfnst0dnmq5f" path="res://scenes/player.tscn" id="1_o5qli"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/enemy_basic.tscn" id="2_enemy"]
+[ext_resource type="Script" path="res://scripts/main.gd" id="3_main"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="4_hud"]
 
 [node name="Main" type="Node2D" unique_id=152224057]
+script = ExtResource("3_main")
 
 [node name="LevelRoot" parent="." unique_id=627615547 instance=ExtResource("1_0wfyh")]
 
@@ -12,3 +15,5 @@
 
 [node name="Enemy" parent="." instance=ExtResource("2_enemy")]
 position = Vector2(160, 0)
+
+[node name="HUD" parent="." instance=ExtResource("4_hud")]
