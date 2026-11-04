@@ -16,8 +16,14 @@ var is_shooting: bool = false
 
 
 
+@export var bullet_scene: PackedScene
+@export var entangle_bullet_scene: PackedScene
+@export var fire_rate: float = 0.15
+@export var bullet_spread: float = 5.0
 
-@export var fire_rate: float = 0.12
+@onready var hud: Hud = get_tree().current_scene.get_node("HUD")
+
+var x_gate_charges: int = 5
 
 var fire_timer: float = 0.0
 
@@ -100,19 +106,18 @@ func play_animation(prefix: String, dir: Vector2) -> void:
 func shoot() -> void:
 	print("Shoot called")
 	
-	var bullet = BULLET_PARTICLE.instantiate()
-
 	var direction := (
-	get_global_mouse_position() - muzzle.global_position
+		get_global_mouse_position() - muzzle.global_position
 	).normalized()
 
+	# Random bullet spread
+	var spread := deg_to_rad(randf_range(-bullet_spread, bullet_spread))
+	direction = direction.rotated(spread)
+
+	var bullet = bullet_scene.instantiate()
 	get_tree().current_scene.add_child(bullet)
 
-	bullet.global_position = muzzle.global_position
-	bullet.global_rotation = direction.angle()
-
-	bullet.emitting = true
-	bullet.finished.connect(bullet.queue_free)
+	bullet.setup(muzzle.global_position, direction)
 
 	gun_sound.play()
 
@@ -129,6 +134,63 @@ func take_hit(luck: float = 0.0) -> QuantumState.State:
 		died.emit()
 	return state
 
+# x gate application
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey:
+		if event.pressed and not event.echo and event.keycode == KEY_X:
+			apply_x_gate()
+		if event.pressed and not event.echo and event.keycode == KEY_E:
+			shoot_entangle()
+
+func apply_x_gate() -> void:
+	if x_gate_charges <= 0:
+		print("No X Gate charges left!")
+		return
+
+	x_gate_charges -= 1
+	hud.update_x_gate_charges(x_gate_charges)
+	
+	var previous := _quantum.state()
+	_quantum.apply_gate(QuantumState.Gate.X)
+	var current := _quantum.state()
+
+	quantum_state_changed.emit(current)
+
+	if current == QuantumState.State.DEAD and previous != QuantumState.State.DEAD:
+		died.emit()
+		
+func shoot_entangle() -> void:
+	if entangle_bullet_scene == null:
+		return
+
+	var direction := (
+		get_global_mouse_position() - muzzle.global_position
+	).normalized()
+
+	var bullet = entangle_bullet_scene.instantiate()
+	get_tree().current_scene.add_child(bullet)
+
+	bullet.setup(muzzle.global_position, direction)
+
+	gun_sound.play()
+	
+func entangle_collapse_to_dead() -> void:
+	var previous := _quantum.state()
+
+	_quantum.die()
+
+	var current := _quantum.state()
+	quantum_state_changed.emit(current)
+
+	if previous != QuantumState.State.DEAD:
+		died.emit()
+
+
+func entangle_collapse_to_alive() -> void:
+	_quantum.collapse_to_alive()
+
+	var current := _quantum.state()
+	quantum_state_changed.emit(current)
 	
 	
 	

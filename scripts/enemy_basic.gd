@@ -7,11 +7,11 @@ signal died
 enum State { IDLE, CHASE, ATTACK }
 
 @export var speed: float = 120.0
-@export var detection_range: float = 400.0
+@export var detection_range: float = 600.0
 @export var attack_range: float = 40.0
 @export var attack_cooldown: float = 1.5
 @export var luck: float = 0.0
-@export var max_health: float = 30.0
+@export var max_health: float = 100.0
 
 var _state := State.IDLE
 var _target: Node2D
@@ -22,6 +22,7 @@ var _health: float
 func _ready() -> void:
 	_health = max_health
 	_target = get_tree().get_first_node_in_group(&"player")
+	add_to_group("enemies")
 
 
 func _physics_process(delta: float) -> void:

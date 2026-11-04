@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://d0haaogq0oolu"]
+
+[ext_resource type="PackedScene" uid="uid://wd3ew7gi7qlf" path="res://scenes/Bullet.tscn" id="1_156vl"]
+[ext_resource type="Script" uid="uid://cuw67ejeir2nw" path="res://scripts/entangleBullet.gd" id="2_guwq5"]
+
+[node name="Bullet" unique_id=984521254 instance=ExtResource("1_156vl")]
+script = ExtResource("2_guwq5")
+speed = 250.0
+lifetime = 1.3
+trail_length = 35.0
+
+[node name="Sprite2D" parent="." index="2" unique_id=165685524]
+scale = Vector2(0.7, 0.7)

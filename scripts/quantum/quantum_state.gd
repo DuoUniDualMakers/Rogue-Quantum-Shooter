@@ -65,6 +65,16 @@ func die() -> void:
 	if previous != State.DEAD:
 		collapsed.emit(previous, State.DEAD)
 
+func collapse_to_alive() -> void:
+	var previous := state()
+
+	_amp_zero = Vector2.ZERO
+	_amp_one = Vector2(1.0, 0.0)
+
+	changed.emit()
+
+	if previous != State.ALIVE:
+		collapsed.emit(previous, State.ALIVE)
 
 func resolve_hit(luck: float, roll: float) -> State:
 	match state():

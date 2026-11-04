@@ -123,16 +123,16 @@ Basically 4 States:
  
   6. Quantum Enemies - there may be superposition enemies that should be measured to fully destroy them, while regularly shooting them with regular bullets may stop them for a while until they are ressurected again.
 
-    
+	
    What to do. Reading the state is the core mechanic: in |+⟩ the player must farm Luck, so player is pushed to the aggresively exactly when most vulnerable. Items mostly affect Luck, Armor, weapons and a unique items that provide additional ways to avoid death. This is not just random.
  
-    
+	
   Hidden phase. |+⟩ and |-⟩ look the same to a normal measurment, yet they lead to opposite outcomes at the Gate. This information is only revealed through interference.
  
-    
+	
    Gates compose and cancel. Using twice the same H or Z phase flip cancels each other
 
-    
+	
   Order matters. Gate sequences are not commutative (if H then Z phase flip doesn't equivalent to Z and then H gates)
     
 
@@ -159,7 +159,7 @@ Basically 4 States:
 
    >Turn/game structure:
 
-    
+	
   Real-time top-down combat; there are no traditional turns. Each level consists of an arena where the player fights enemies for a set amount of time.
 
 
@@ -188,7 +188,3 @@ Windows Platform, Godot Engine
 >Originality / Existing Games:
 
 There are similar Rogue-like games, because the genre itself is instantly recognizable. This project is different in its aim to apply quantum-mechanics inspired elements and systems to the popular Rogue-like game genre, which the developers of this project havent seen before yet. The project doesn't exactly adapt an existing game.
-
-
-
-

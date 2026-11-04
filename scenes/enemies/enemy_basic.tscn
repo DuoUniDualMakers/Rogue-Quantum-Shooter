@@ -1,16 +1,15 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene format=3 uid="uid://dah1na7u6tugk"]
 
-[ext_resource type="Script" path="res://scripts/enemy_basic.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://bist7wqnviosi" path="res://scripts/enemy_basic.gd" id="1_script"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_body"]
-radius = 12.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hf8mt"]
 
-[node name="EnemyBasic" type="CharacterBody2D"]
+[node name="EnemyBasic" type="CharacterBody2D" unique_id=1371664927]
 script = ExtResource("1_script")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_body")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=578193908]
+shape = SubResource("RectangleShape2D_hf8mt")
 
-[node name="Visual" type="Polygon2D" parent="."]
+[node name="Visual" type="Polygon2D" parent="." unique_id=1052557081]
 color = Color(0.95, 0.25, 0.45, 1)
 polygon = PackedVector2Array(-10, -10, 10, -10, 10, 10, -10, 10)

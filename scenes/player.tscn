@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dhfnst0dnmq5f"]
 
 [ext_resource type="Script" uid="uid://d261h24e7a3cm" path="res://scripts/player.gd" id="1_qsb7e"]
+[ext_resource type="PackedScene" uid="uid://wd3ew7gi7qlf" path="res://scenes/Bullet.tscn" id="2_jlll7"]
 [ext_resource type="Texture2D" uid="uid://y4o56csfgf2r" path="res://assets/images/Player/Idle/rotations/east.png" id="2_qjsmb"]
 [ext_resource type="Texture2D" uid="uid://bej222x35cr50" path="res://assets/images/Player/Idle/rotations/north.png" id="3_mwp2n"]
 [ext_resource type="Texture2D" uid="uid://dn68buxov1pi4" path="res://assets/images/Player/Idle/rotations/north-east.png" id="4_0yhus"]
@@ -401,10 +402,11 @@ scale_max = 2.0
 
 [node name="Player" type="CharacterBody2D" unique_id=184423102 groups=["player"]]
 script = ExtResource("1_qsb7e")
+bullet_scene = ExtResource("2_jlll7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1665225661]
 sprite_frames = SubResource("SpriteFrames_riqys")
-animation = &"idle_north"
+animation = &"idle_south_west"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=492151803]
 shape = SubResource("CapsuleShape2D_bhunq")
@@ -420,11 +422,13 @@ texture = ExtResource("74_0yhus")
 lifetime = 0.12
 one_shot = true
 explosiveness = 1.0
-trail_lifetime = 0.09999999999999999
+trail_lifetime = 0.1
 process_material = SubResource("ParticleProcessMaterial_bhunq")
 
 [node name="GunSound" type="AudioStreamPlayer2D" parent="Gun" unique_id=422599091]
 script = ExtResource("74_qjsmb")
+
+[node name="Bullet" parent="Gun" unique_id=984521254 instance=ExtResource("2_jlll7")]
 
 [node name="BulletParticles" type="GPUParticles2D" parent="Gun" unique_id=2088487437]
 emitting = false
