@@ -1,3 +1,5 @@
+todo: add crosshair that replaces mouse coursor when it's inside the game window
+
 # Rogue Quantum Shooter: Anomaly Breach Survival
 
 >Developers:
