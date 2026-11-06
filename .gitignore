@@ -6,3 +6,12 @@
 .commandcode/
 .agents/
 skills-lock.json
+
+# OS junk
+Thumbs.db
+.DS_Store
+
+# Godot temp / cache
+*.tmp
+.godot/
+*.translation
