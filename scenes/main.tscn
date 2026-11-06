@@ -12,15 +12,18 @@
 script = ExtResource("3_main")
 
 [node name="LevelRoot" parent="." unique_id=627615547 instance=ExtResource("1_0wfyh")]
+position = Vector2(0, 2)
 
 [node name="Player" parent="." unique_id=184423102 instance=ExtResource("1_o5qli")]
 entangle_bullet_scene = ExtResource("4_o6xl0")
-
-[node name="Enemy" parent="." unique_id=1650609085 instance=ExtResource("2_enemy")]
-position = Vector2(160, 0)
 
 [node name="HUD" parent="." unique_id=499443585 instance=ExtResource("4_hud")]
 
 [node name="EnemySpawner" type="Node2D" parent="." unique_id=1891420079]
 script = ExtResource("6_tefeu")
 enemy_scene = ExtResource("2_enemy")
+
+[node name="EndOfLevelTimer" type="Timer" parent="." unique_id=1117740178]
+wait_time = 120.0
+one_shot = true
+autostart = true

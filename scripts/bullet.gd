@@ -45,8 +45,12 @@ func _physics_process(delta: float) -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	if body == get_tree().get_first_node_in_group("player"):
+		print("trigger")
 		return
 
 	if body.has_method("take_damage"):
 		body.take_damage(damage)
 		queue_free()
+		
+	if body is TileMapLayer:
+		queue_free() # This destroys the bullet

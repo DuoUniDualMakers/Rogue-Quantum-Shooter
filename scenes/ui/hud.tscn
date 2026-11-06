@@ -55,3 +55,23 @@ theme_override_font_sizes/font_size = 16
 text = "ENTANGLEMENT: ENEMY COLLAPSED TO DEA!
 "
 autowrap_mode = 3
+
+[node name="TimerLabel" type="Label" parent="." unique_id=971099169]
+offset_left = 500.0
+offset_top = 9.0
+offset_right = 661.0
+offset_bottom = 65.0
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 18
+
+[node name="EscapeLabel" type="Label" parent="." unique_id=1039070277]
+visible = false
+offset_left = 234.0
+offset_top = 106.0
+offset_right = 990.0
+offset_bottom = 142.0
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 36
+text = "ESCAPE TO THE GATE!!!"
+
+[node name="EscapeTimer" type="Timer" parent="." unique_id=499529263]

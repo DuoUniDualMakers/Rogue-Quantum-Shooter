@@ -13,7 +13,7 @@ const SPEED = 300.0
 var last_direction: Vector2 = Vector2.DOWN
 var is_shooting: bool = false
 
-
+var facing_direction: Vector2i = Vector2i(0, 1) # Defaults to facing DOWN in grid coordinates
 
 
 @export var bullet_scene: PackedScene
@@ -63,6 +63,11 @@ func process_movement() -> void:
 	if direction != Vector2.ZERO:
 		velocity = direction * SPEED
 		last_direction = direction
+		# code for facing direction
+		if abs(direction.x) > abs(direction.y):
+			facing_direction = Vector2i(sign(direction.x), 0)
+		else:
+			facing_direction = Vector2i(0, sign(direction.y))
 	else:
 		velocity = Vector2.ZERO
 	
