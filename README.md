@@ -1,4 +1,7 @@
-todo: add crosshair that replaces mouse coursor when it's inside the game window
+todo: 1. add crosshair that replaces mouse coursor when it's inside the game window
+2. mob sprites
+3. main character shooting sprites 
+4. sounds bug?
 
 # Rogue Quantum Shooter: Anomaly Breach Survival
 
