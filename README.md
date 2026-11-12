@@ -14,6 +14,9 @@ todo:
 
 5. level pass mechanic - update arena and add different colors/tints to the new arena tiles (purple/red etc)
 
+other todos:
+	everything left unimplemented in the docs (LUCK style, etc...)
+
 # Rogue Quantum Shooter: Anomaly Breach Survival
 
 >Developers:
