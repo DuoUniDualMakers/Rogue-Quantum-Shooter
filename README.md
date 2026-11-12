@@ -1,6 +1,6 @@
 big todo:
 
-1. tutorial
+1. tutorial showing implemented mechanics
 
 todo: 
 
