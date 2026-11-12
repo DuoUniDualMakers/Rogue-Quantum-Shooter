@@ -1,7 +1,17 @@
-todo: 1. add crosshair that replaces mouse coursor when it's inside the game window
+big todo:
+
+1. tutorial
+
+todo: 
+
+1. add crosshair that replaces mouse coursor when it's inside the game window
+
 2. mob sprites
+
 3. main character shooting sprites 
+
 4. sounds bug?
+
 5. level pass mechanic - update arena and add different colors/tints to the new arena tiles (purple/red etc)
 
 # Rogue Quantum Shooter: Anomaly Breach Survival
